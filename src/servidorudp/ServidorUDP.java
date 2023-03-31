@@ -6,6 +6,7 @@ package servidorudp;
 
 import java.net.*;
 import java.io.*;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -34,19 +35,14 @@ public static void main (String args[]) {
         // Leemos una petición del DatagramSocket
         socketUDP.receive(peticion);
         System.out.println("Recibo la informacion del cliente");
-        String mensaje = new String(peticion.getData());
-        System.out.println(mensaje);
+        String mensajes = new String(peticion.getData());
+        System.out.println(mensajes);
         int puertoCliente = peticion.getPort();
         InetAddress direccion = peticion.getAddress();
-        mensaje = "Hola desde el servidor";
-        buffer = mensaje.getBytes();
+        mensajes = "Hola desde el servidor";
         
+        buffer = mensajes.getBytes();
         
-        //System.out.print("Datagrama recibido del host: " +
-        //                   peticion.getAddress());
-        //System.out.println(" desde el puerto remoto: " +
-        //                   peticion.getPort());
-
         // Construimos el DatagramPacket para enviar la respuesta
         DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, direccion, puertoCliente);
         
